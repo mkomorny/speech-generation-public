@@ -1,0 +1,39 @@
+HOW TO USE: speech-generation
+====================================
+
+PURPOSE
+  Convert radio show scripts or multi-speaker dialogues into production speech audio
+  using the Gemini TTS model via the Interactions API, applying telephone bandpass
+  filtering to correspondent voices while preserving clean host studio audio.
+
+CAPABILITIES
+  - End-to-end multi-speaker speech generation from markdown scripts
+  - Parallel generation with retry logic and exponential backoff
+  - Dynamic voice assignment by gender and caller tags (Puck, Kore, Aoede, Charon, Fenrir)
+  - Telephone bandpass filter (300Hz-3.4kHz) + compression for remote callers
+  - Single-pass master audio concatenation to high-fidelity 24kHz 16-bit PCM WAV
+
+USE CASES
+  - Produce full radio talk show episodes from generated scripts
+  - Create multi-character podcast episodes with distinct acoustic treatments
+  - Batch process dialogue turns in parallel for high throughput
+
+IDEAS
+  - Pair with script-writing skill to convert research directly into audible episodes
+  - Adjust bandpass filter curves for different communication channels (walkie-talkie, megaphone)
+  - Use custom speaker voice mapping for character dramatizations
+
+PROMPTS YOU CAN PASTE
+  Convert the script in workspace/data/script.md to speech audio.
+
+  Generate speech audio for our radio show episode with 8 workers.
+
+  Run the speech-generation pipeline on the latest episode script.
+
+EXAMPLE FLOW
+  You:   Convert workspace/data/script.md into final speech audio.
+  Model: Runs generate_tts.py --workspace ./workspace --workers 8
+         Processes turns in parallel, applies phone filter to callers, outputs speech.wav
+
+DEFAULT GOALS IF YOU DON'T NAME ONE
+  Parse workspace/data/script.md, assign voices, generate parallel speech turns, and produce workspace/audio/speech/speech.wav.
